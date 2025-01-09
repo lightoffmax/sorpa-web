@@ -39,44 +39,45 @@ export default function Nav() {
   const menuItems = [
     { name: "General", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Lorem", href: "/lorem" },
+    { name: "Poem", href: "/poem" },
     { name: "Analytics", href: "/analytics" },
     { name: "System", href: "/system" },
     { name: "Deployments", href: "/deployments" },
     { name: "My Settings", href: "/my-settings" },
     { name: "Team Settings", href: "/team-settings" },
     { name: "Help & Feedback", href: "/help-feedback" },
-    { name: "Log Out", href: "/log-out" }
+    { name: "Log Out", href: "/logout" },
+    { name: "Log In", href: "/login" },
   ]
   const pathname = usePathname();
   const router = useRouter();
   const {logout, user,} = useAuth();
-  const isLogin = () => {
-    if (user) {
-        return ({"login": "hidden", "logout": ''})
-    } else { 
-        return ({"login": '', "logout": "hidden"}
-        )}
-  }
+//   const isLogin = () => {
+//     if (user && href === ) {
+//         return ({"login": "hidden", "logout": ''})
+//     } else { 
+//         return ({"login": '', "logout": "hidden"}
+//         )}
+//   }
 
   return (   
-    <header>
-    <Navbar className="border-b-[1px]" isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} >
+    <header className="fixed top-0 left-0 w-full">
+    <Navbar className="border-b-[1px] flex w-full " isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen} >
       <NavbarContent className="sm:hidden" >
         <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
       </NavbarContent>
 
       <NavbarContent className="sm:hidden pr-3" justify="start" >
         <NavbarBrand>
-          <AcmeLogo />
-          <p className="font-bold text-inherit">ACME</p>
+          {/* <AcmeLogo />
+          <p className="font-bold text-inherit">ACME</p> */}
         </NavbarBrand>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="start" >
         <NavbarBrand >
-          <AcmeLogo />
-          <p className="font-bold text-inherit">ACME</p>
+          {/* <AcmeLogo />
+          <p className="font-bold text-inherit">ACME</p> */}
         </NavbarBrand>
         </NavbarContent>
         <NavbarContent className="hidden sm:flex gap-4" justify="center">
@@ -99,7 +100,7 @@ export default function Nav() {
 
       <NavbarContent justify="end">
         <NavbarItem className={user ? '' : 'hidden'}>
-          <Button onPress={logout} color="danger" href="/login" variant="ghost">
+          <Button onPress={logout} color="danger" href="#" variant="ghost">
             Logout
           </Button>
         </NavbarItem>
@@ -119,7 +120,7 @@ export default function Nav() {
         {menuItems.map(({name, href}, index) => (
           <NavbarMenuItem key={index}>
             <Link
-              className="w-full"
+              className="w-full "
               href={href}
               color={
                 pathname === href ? "warning" : name === 'Log Out' ? "danger" : "foreground"

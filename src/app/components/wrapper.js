@@ -1,6 +1,6 @@
 export default function Wrapper({content}) {
     return (
-        <div className="px-[40px] pt-[20px] h-screen">
+        <div className="flex flex-col pt-[100px] px-[60px] min-h-screen overflow-y-auto ">
             {content}
         </div>
     )

@@ -23,19 +23,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    
-    <html lang="en">
+   
+    <html lang="en" className="min-h-screen " >
 
       <body
-        className={`${geistSans.variable} ${geistMono.variable} overflow-hidden antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} min-h-screen `}
       >
-      <AuthProvider>
-        <Nav/>
-        <Wrapper content={children} />
-      </AuthProvider>
+        <AuthProvider>
+          <NextUIProvider>
+            <Nav/>
+            <Wrapper content={children} />
+          </NextUIProvider>
+        </AuthProvider> 
       </body>
       
     </html>
-    
+
   );
 }

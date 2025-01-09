@@ -10,17 +10,19 @@ import {
   NavbarMenuItem,
   Button,
   Link} from '@nextui-org/react'
+import Table from "./components/table";
+import MyTable from "./components/table";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen items-center justify-items-center min-h-screen p-6 pb-10 gap-16 sm:m-10 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex-grow gap-8 row-start-2 items-center sm:items-start">
-      
+    <div className="flex flex-col overflow-y-auto min-h-screen items-center justify-items-center min-h-screen pb-10 gap-16 font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-grow w-full mx-auto gap-8 row-start-2 items-center sm:items-start">
+        <MyTable/>
         
       </main>
-      <footer className=" pb-20 flex gap-10 pt-[15px] w-full mx-auto border-t-1 flex-wrap items-center justify-center">
+      <footer className="flex gap-10 pt-[15px] pb-[5px] w-full mx-auto border-t-1 items-center justify-center">
         <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
+          className="flex  items-center gap-2 hover:underline hover:underline-offset-4"
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
           target="_blank"
           rel="noopener noreferrer"
