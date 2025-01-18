@@ -1,107 +1,52 @@
 'use client'
-import { useTable } from 'react-table';
 
-
-// const Table = ({columns, data}) => {
-//     const table = useReactTable({data, columns })
-//     return (
-//         <table className="table-auto border-collapse w-full">
-//             <thead>
-//                 {table.getHeaderGroups().map((headerGroup) => (
-//                     <tr key={headerGroup.id}>
-//                         {headerGroup.headers.map((header) => (
-//                             <th key={header.id}>
-//                                 {flexRender(header.column.columnDef.header, header.getContext())}
-//                             </th>
-//                         ))}
-//                     </tr>
-//                 ))}
-//             </thead>
-        
-//             <tbody>
-//                 {table.getRowModel().rows.map((row) => (
-//                     <tr key={row.id}>
-//                         {table.getVisibleCells().map((cell) => (
-//                             <th key={cell.id}>
-//                                 {flexRender(cell.columnDef.column.cell, cell.getContext())}
-
-//                             </th>
-//                         ))}
-//                     </tr>
-//                 ))}
-//             </tbody>
-//         </table>
-//     )   
-//   }
-
-const Table = ({ columns, data }) => {
-    // Инициализация таблицы с помощью useTable
-    const {
-      getTableProps,
-      getTableBodyProps,
-      headerGroups,
-      rows,
-      prepareRow,
-    } = useTable({ 
-     columns,
-      data,
-});
-  
+export default function MyTable ({tasks, deleteTask, toggleTask}) {
+    if (!Array.isArray(tasks) || tasks.length === 0) {
+        return <div>Нет данных для отображения или данные имеют неверный формат.</div>;
+      }
     return (
-      <table {...getTableProps()} className="table-auto border-collapse w-full">
-        <thead>
-          {headerGroups.map((headerGroup) => (
-            <tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
-              {headerGroup.headers.map((column) => (
-                <th {...column.getHeaderProps()} key={column.id} className="border p-2 bg-gray-700 text-black">
-                  {column.render('Header')}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row) => {
-            prepareRow(row);
-            return (
-              <tr {...row.getRowProps()} key={row.id}>
-                {row.cells.map((cell) => {
-                  return (
-                    <td {...cell.getCellProps()} key={cell.id} className="border p-2">
-                      {cell.render('Cell')}
-                    </td>
-                  );
-                })}
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    );
-  };
 
+        <table className=' table-auto border-collapse w-full border'>
 
-export default function MyTable () {
-    const data = [
-        { id: 1, name: "John Doe", email: "john@example.com" },
-        { id: 2, name: "Jane Smith", email: "jane@example.com" },
-      ];
-      
-      const columns = [
-        {
-          Header: 'ID',
-          accessor: 'id',  // Убедитесь, что колонка имеет accessor (или id), который совпадает с ключом в данных
-        },
-        {
-          Header: 'Name',
-          accessor: 'name',
-        },
-        {
-          Header: 'Age',
-          accessor: 'age',
-        },
-      ];
+            <thead className="bg-foreground-700">
 
+                <tr>
+                    <th className='border p-[2px]'>
+                        ID
+                    </th>
+                    <th className='border p-[2px]'>
+                        Task Name
+                    </th>
+                    <th className='border p-[2px]'>
+                        Completed
+                    </th>
+                    <th className='border p-[2px]'>
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody className="bg-foreground-400">
+                {tasks.map((task) => (
+                    <tr key={task.id} >
+                        <th className='border p-[2px]'>
+                            {task.id}
+                        </th>
+                        <th className='border p-[2px]'>
+                            {task.title}
+                        </th>
+                        <th className='border p-[2px]'>
+                            {task.completed ? 'Completed' : 'Pending'}
+                        </th>
+                        <th className='border p-[2px] '>
+                            <button onClick={() => toggleTask(task.id)}
+                            className="border bg-yellow-500 text-gray-500 rounded-full px-2 py-1 " >Toggle</button>
+                            <button onClick={() => deleteTask(task.id)}
+                            className="border bg-red-500 rounded-full px-2 py-1 ml-2 ">Delete</button>
+                        </th>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+    )
+ }
 
-      return (<Table data={data} columns={columns}/>);
-    }
